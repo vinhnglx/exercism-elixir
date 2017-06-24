@@ -1,4 +1,6 @@
 defmodule NucleotideCount do
+  @nucleotides [?A, ?C, ?G, ?T]
+
   @doc """
   Counts individual nucleotides in a NucleotideCount strand.
 
@@ -26,7 +28,13 @@ defmodule NucleotideCount do
   """
   @spec histogram([char]) :: map
   def histogram(strand) do
-    %{?A => count(strand, ?A), ?T => count(strand, ?T),
-      ?C => count(strand, ?C), ?G => count(strand, ?G)}
+    # NOTE: the bad way
+    # %{?A => count(strand, ?A), ?T => count(strand, ?T),
+    #   ?C => count(strand, ?C), ?G => count(strand, ?G)}
+
+    # NOTE: the good way
+    @nucleotides |> Enum.reduce(%{}, fn(nuc, acc)->
+      Map.put(acc, nuc, count(strand, nuc))
+    end)
   end
 end
