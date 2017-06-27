@@ -35,4 +35,28 @@ defmodule RpnTest do
     Rpn.push(pid, :-)
     assert Rpn.peek(pid) == [-5]
   end
+
+  test "multiplying" do
+    {:ok, pid} = Rpn.start
+    Rpn.push(pid, 5)
+    Rpn.push(pid, 10)
+
+    Rpn.push(pid, :*)
+    assert Rpn.peek(pid) == [50]
+  end
+
+  test "combo" do
+    {:ok, pid} = Rpn.start
+    Rpn.push(pid, 5)
+    Rpn.push(pid, 10)
+    Rpn.push(pid, :*)
+
+    Rpn.push(pid, 4)
+    Rpn.push(pid, :+)
+
+    Rpn.push(pid, 30)
+    Rpn.push(pid, :-)
+
+    assert Rpn.peek(pid) == [24]
+  end
 end

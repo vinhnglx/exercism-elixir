@@ -20,13 +20,16 @@ defmodule Rpn do
     ## Example
 
       iex > {:ok, pid} = Rpn.start
-      iex > Rpn.push(pid, 5)
+      iex > Rpn.push(pid, 5) # 5
+      iex > Rpn.push(pid, 2) # 2
+      iex > Rpn.peek(pid, :+) # 7
   """
   def push(pid, operand) do
     Agent.update(pid, fn(list)->
       case operand do
         :+ -> [list |> Enum.reduce(0, fn(x, acc)-> x + acc end)]
-        :- -> [Enum.reduce(list, 0, fn(x, acc)-> x - acc end)]
+        :- -> [list |> Enum.reduce(0, fn(x, acc)-> x - acc end)]
+        :* -> [list |> Enum.reduce(1, fn(x, acc)-> x * acc end)]
         _ -> [operand|list]
       end
     end)
