@@ -25,7 +25,8 @@ defmodule Rpn do
   def push(pid, operand) do
     Agent.update(pid, fn(list)->
       case operand do
-        :+ -> [Enum.sum(list)]
+        :+ -> [list |> Enum.reduce(0, fn(x, acc)-> x + acc end)]
+        :- -> [Enum.reduce(list, 0, fn(x, acc)-> x - acc end)]
         _ -> [operand|list]
       end
     end)
