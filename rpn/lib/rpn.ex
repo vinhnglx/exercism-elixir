@@ -23,7 +23,12 @@ defmodule Rpn do
       iex > Rpn.push(pid, 5)
   """
   def push(pid, operand) do
-    Agent.update(pid, fn(list)-> [operand|list] end)
+    Agent.update(pid, fn(list)->
+      case operand do
+        :+ -> [Enum.sum(list)]
+        _ -> [operand|list]
+      end
+    end)
   end
 
   @doc """

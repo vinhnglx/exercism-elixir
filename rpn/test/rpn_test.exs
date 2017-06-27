@@ -15,4 +15,14 @@ defmodule RpnTest do
     Rpn.push(pid, 5)
     assert Rpn.peek(pid) == [5]
   end
+
+  test "adding" do
+    {:ok, pid} = Rpn.start
+    Rpn.push(pid, 5)
+    Rpn.push(pid, 10)
+    assert Rpn.peek(pid) == [10, 5]
+
+    Rpn.push(pid, :+)
+    assert Rpn.peek(pid) == [15]
+  end
 end
