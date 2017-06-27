@@ -11,5 +11,5 @@ iex> Rpn.push(pid, 5)
 iex> Rpn.push(pid, 5)
 iex> Rpn.push(pid, :+)
 iex> Rpn.peek(pid)
-# [6]
+# [10]
 ```
