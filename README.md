@@ -6,3 +6,4 @@ Solve practices
 - Nucleotile_count
 - Rotational Ciper
 - Strain
+- Protein-Translation
