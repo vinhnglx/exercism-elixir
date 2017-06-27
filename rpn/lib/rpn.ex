@@ -4,15 +4,13 @@ defmodule Rpn do
   """
 
   @doc """
-  Hello world.
+    Start a Rpn calculation
 
-  ## Examples
+    ## Example
 
-      iex> Rpn.hello
-      :world
-
+      iex > Rpn.start
   """
-  def hello do
-    :world
+  def start do
+    Agent.start(fn -> [] end)
   end
 end
