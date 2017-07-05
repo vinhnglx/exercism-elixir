@@ -1,19 +1,26 @@
 # Entrada
 
-**TODO: Add description**
+Portal implementation by GenServer
 
-## Installation
+## Getting started
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `entrada` to your list of dependencies in `mix.exs`:
+- Run `iex -S mix run`
+
+- Example
 
 ```elixir
-def deps do
-  [{:entrada, "~> 0.1.0"}]
-end
+
+iex(1)> Entrada.start(:green)
+{:ok, #PID<0.138.0>}
+iex(2)> Entrada.start(:blue)
+{:ok, #PID<0.140.0>}
+iex(3)> Entrada.pushing(:blue, [4,2,1,2,4,53])
+[:ok, :ok, :ok, :ok, :ok, :ok]
+iex(4)> Entrada.transfer(:blue, :green)
+:ok
+iex(5)> Entrada.get(:blue)
+[53, 4, 2, 1, 2]
+iex(6)> Entrada.get(:green)
+[4]
+
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/entrada](https://hexdocs.pm/entrada).
-
