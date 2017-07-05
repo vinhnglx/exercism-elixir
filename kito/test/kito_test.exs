@@ -8,7 +8,8 @@ defmodule KitoTest do
 
   test "put a new key value to kito" do
     pid = Kito.start
-    assert Kito.put(pid, :first_name, "vincent") == :ok
+    # assert Kito.put(pid, :first_name, "vincent") == :ok
+    assert Kito.put(pid, :first_name, "vincent") == {:cast, {:put, :first_name, "vincent"}}
   end
 
   test "get a existing value from a key" do

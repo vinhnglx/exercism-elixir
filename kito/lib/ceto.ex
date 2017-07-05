@@ -8,18 +8,26 @@ defmodule Ceto do
   end
 
   def call(ceto_pid, request) do
-    send(ceto_pid, {request, self()})
+    send(ceto_pid, {:call, request, self()})
 
     receive do
       {:response, response} -> response
     end
   end
 
+  def cast(ceto_pid, request) do
+    send(ceto_pid, {:cast, request})
+  end
+
   defp loop(callback_module, current_state) do
     receive do
-      {request, caller} ->
+      {:call, request, caller} ->
         {response, new_state} = callback_module.handle_call(request, current_state)
         send(caller, {:response, response})
+        loop(callback_module, new_state)
+
+      {:cast, request} ->
+        new_state = callback_module.handle_cast(request, current_state)
         loop(callback_module, new_state)
     end
   end

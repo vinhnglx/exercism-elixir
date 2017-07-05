@@ -13,13 +13,18 @@ defmodule Kito do
     {Map.get(state, key), state}
   end
 
+  def handle_cast({:put, key, value}, state) do
+    Map.put(state, key, value)
+  end
+
   # Interface functions
   def start do
     Ceto.start(Kito)
   end
 
   def put(pid, key, value) do
-    Ceto.call(pid, {:put, key, value})
+    # Ceto.call(pid, {:put, key, value})
+    Ceto.cast(pid, {:put, key, value})
   end
 
   def get(pid, key) do
