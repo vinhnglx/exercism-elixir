@@ -23,7 +23,7 @@ defmodule Kito.Server do
 
   # Interface functions
   def start do
-    GenServer.start(Kito.Server, nil)
+    GenServer.start(__MODULE__, nil)
   end
 
   def add(pid, kito) do
